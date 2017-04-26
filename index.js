@@ -9,12 +9,12 @@ var builder = require('botbuilder');
 // Listen for any activity on port 3978 of our local server
 var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-	console.log('%s listening to %s', server.name, server.url);
+    console.log('%s listening to %s', server.name, server.url);
 });
 // Create chat bot
 var connector = new builder.ChatConnector({
-	appId: process.env.MICROSOFT_APP_ID,
-	appPassword: process.env.MICROSOFT_APP_PASSWORD
+    appId: process.env.MICROSOFT_APP_ID,
+    appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
 var bot = new builder.UniversalBot(connector);
 
@@ -25,6 +25,8 @@ server.post('/api/messages', connector.listen());
 // =========================================================
 // This is called the root dialog. It is the first point of entry for any message the bot receives
 bot.dialog('/', function (session) {
-// Send 'hello world' to the user
-session.send("Hello World");
+    // Send 'hello world' to the user
+    var msg = session.message.text;
+    session.send("Piti-Bot: " + msg);
+   
 });
